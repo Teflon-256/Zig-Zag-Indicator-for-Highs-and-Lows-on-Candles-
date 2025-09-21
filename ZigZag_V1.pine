@@ -1,5 +1,5 @@
 //@version=6
-indicator("ZigZag by Candle Color (Custom Rules) - Fixed", overlay=true, max_labels_count=500, max_lines_count=500)
+indicator("Origins and Balances: Highs and Lows Indicator", overlay=true, max_labels_count=500, max_lines_count=500)
 
 // ---------------------------------------------------------------------------
 // State variables (no bool is initialized to na)
@@ -31,11 +31,7 @@ f_add_pivot(_idx, _price, _type) =>
         array.push(piv_idx, _idx)
         array.push(piv_price, _price)
         array.push(piv_type, _type)
-        // draw a label on the pivot
-        if _type == "high"
-            label.new(_idx, _price, text="H", xloc=xloc.bar_index, yloc=yloc.price, style=label.style_label_down, color=color.black, textcolor=color.white, size=size.tiny)
-        else
-            label.new(_idx, _price, text="L", xloc=xloc.bar_index, yloc=yloc.price, style=label.style_label_up, color=color.white, textcolor=color.black, size=size.tiny)
+        // (Pivot H/L labels removed per request)
         // draw connecting line to previous pivot if exists
         if array.size(piv_idx) >= 2
             prev_idx = array.get(piv_idx, array.size(piv_idx) - 2)
@@ -173,6 +169,7 @@ if barstate.isconfirmed
                     seq_last_high := math.max(seq_last_high, high)
                     seq_last_low := math.min(seq_last_low, low)
                     seq_last_bar := bar_index
+
 // ----------------------------------------------------------------------------
 // End of main logic
 // ----------------------------------------------------------------------------
